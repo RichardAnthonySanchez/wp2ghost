@@ -1,47 +1,70 @@
-[![Build Status](https://travis-ci.org/jonhoo/wp2ghost.svg?branch=master)](https://travis-ci.org/jonhoo/wp2ghost)
+# wp2ghost
 
-This script will convert WordPress XML [exports][wpexport] ([WXR][wxr]) to the
-Ghost (1.x [for now][1x]) [JSON format][gjson]. This JSON file can then
-be directly imported using the Ghost debug interface.
+A modern, client-side React application to convert WordPress XML exports to Ghost JSON format and vice versa.
+![Thumbnail for Wp2Ghost](./public/thumbnail.jpg)
 
-While there is a [WordPress plugin][wpghost] that will export to the Ghost
-format directly, it only seems to work some of the time, and users of
-WordPress.com will have a hard time using it seeing how WP.com doesn't allow
-plugins at all (in its free account).
+This is a fork of [jonhoo/wp2ghost](https://github.com/jonhoo/wp2ghost), updated with a modern React frontend and improved conversion logic for Ghost 6.x.
 
-This is a simple command-line tool that takes a WordPress XML file as input and
-prints the corresponding Ghost JSON to standard out. It currently converts the
-following:
+## Features
 
-  - Posts: title, slug, content, page/post, featured, status, creation/publication date
-  - Catgeories: name, slug, description (converted to tags)
-  - Tags: name, slug
+- **Bidirectional Conversion**: Convert WordPress XML → Ghost JSON AND Ghost JSON → WordPress XML.
+- **Client-Side Processing**: All conversions happen entirely in your browser. Your data never leaves your device.
+- **Shortcode Support**: Handles WordPress shortcodes like `[caption]`, `[video]`, and `[audio]`.
+- **Ghost Version Support**: Select your target Ghost version (5.x, 6.x) via the UI.
+- **Date Handling**: Preserves publication and creation dates across platforms.
+- **Tag/Category Mapping**: Automatically maps WordPress categories and tags to Ghost tags.
 
-WordPress authors are parsed, but not added to the output yet because Ghost
-currently only supports editing the primary user during imports.
+## Usage
 
-To run it, you need to have [NodeJS][node] installed (and
-[maybe](https://github.com/jonhoo/wp2ghost/issues/12) also [Python][python]). You
-can then just run:
+### Live Version
+You can use the live version of this tool at: [https://RichardAnthonySanchez.github.io/wp2ghost](https://RichardAnthonySanchez.github.io/wp2ghost)
 
-    $ cd wp2ghost
-    $ npm install
-    $ GHOST_VERSION="<your-ghost-version>" node bin/wp2ghost.js <your-wordpress-xml> > ghost.json
+### Local Setup
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/RichardAnthonySanchez/wp2ghost.git
+   cd wp2ghost
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
+### How to Convert
+1. Upload your WordPress XML export or Ghost JSON file.
+2. Choose the target Ghost version (if applicable).
+3. Click **Convert**.
+4. Download the resulting file or copy the output.
 
-If you prefer not to specify the Ghost version, you can run the command directly (it defaults to version 6.0):
+### Import to Ghost
+1. Go to your Ghost admin dashboard (e.g., `https://your-site.com/ghost`).
+2. Navigate to **Settings > Labs**.
+3. Use the **Import content** tool to upload your new JSON file.
 
-    $ node bin/wp2ghost.js <your-wordpress-xml> > ghost.json
+## Quality Assurance
 
-Next, go to http://example.com/ghost, select Labs in the menu on the
-left, and import `ghost.json`. All your content should now show up!
+We use **Vitest** for testing our conversion services.
+
+```bash
+npm test
+```
+
+## Contributors
+
+This project builds upon the hard work of the original contributors to the [jonhoo/wp2ghost](https://github.com/jonhoo/wp2ghost) repository. You can see the full list of contributors here:
+[Original Contributors List](https://github.com/jonhoo/wp2ghost/graphs/contributors)
+
+## Links
+
+- [WordPress Export Guide](http://en.support.wordpress.com/export/)
+- [Wordpress Import Guide](https://docs.ghost.org/migration/wordpress) or [Custom Import Guide](https://docs.ghost.org/migration/custom)
 
 Happy migrating!
-
-  [wpexport]: http://en.support.wordpress.com/export/
-  [wxr]: http://devtidbits.com/2011/03/16/the-wordpress-extended-rss-wxr-exportimport-xml-document-format-decoded-and-explained/
-  [gjson]: https://docs.ghost.org/api/migration/#json-file-structure
-  [wpghost]: http://wordpress.org/plugins/ghost/
-  [node]: http://nodejs.org/
-  [python]: https://www.python.org/
-  [1x]: https://github.com/jonhoo/wp2ghost/issues/13
