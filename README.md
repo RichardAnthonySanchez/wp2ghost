@@ -14,6 +14,21 @@ This is a fork of [jonhoo/wp2ghost](https://github.com/jonhoo/wp2ghost), updated
 - **Date Handling**: Preserves publication and creation dates across platforms.
 - **Tag/Category Mapping**: Automatically maps WordPress categories and tags to Ghost tags.
 
+## Architecture Overview
+
+This project is built as a pure client-side application to ensure maximum privacy and performance. For a deep dive into the system design, data flow, and conversion pipeline, please see our [Architecture Documentation](./ARCHITECTURE.md).
+
+```mermaid
+graph LR
+    User[User] -->|Opens App| Browser[Browser / React App]
+    Browser -->|Reads File| FS[Local File System]
+    Browser -->|Parses & Converts| RAM[Browser Memory]
+    RAM -->|Downloads Result| FS
+    style User fill:#f9f,stroke:#333
+    style Browser fill:#bbf,stroke:#333
+    style RAM fill:#dfd,stroke:#333
+```
+
 ## Usage
 
 ### Live Version
