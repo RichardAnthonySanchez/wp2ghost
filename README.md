@@ -17,7 +17,7 @@ This is a fork of [jonhoo/wp2ghost](https://github.com/jonhoo/wp2ghost), updated
 ## Usage
 
 ### Live Version
-You can use the live version of this tool at: [https://RichardAnthonySanchez.github.io/wp2ghost](https://RichardAnthonySanchez.github.io/wp2ghost)
+You can use the live version of this tool at: [https://wp2ghost.tonysanchez.dev/](https://wp2ghost.tonysanchez.dev/)
 
 ### Local Setup
 1. **Clone the repository**:
